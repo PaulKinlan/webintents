@@ -1,0 +1,21 @@
+{
+  "name": "Mememator",
+  "version": "1.0.0.7",
+  "description": "Helping you create memes since 1337",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.mememator.com/"],
+    "launch" : {
+      "web_url" : "http://www.mememator.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/edit" : [{
+      "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
+      "href" : "http://www.mememator.com/",
+      "title" : "Mememator"
+    }]
+  }
+}

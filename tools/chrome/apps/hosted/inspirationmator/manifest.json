@@ -1,0 +1,20 @@
+{
+  "name": "Inspirationmator",
+  "version": "1.0.0.6",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.inspirationmator.com/"],
+    "launch" : {
+      "web_url" : "http://www.inspirationmator.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/edit" : [{
+      "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
+      "href" : "http://www.inspirationmator.com/",
+      "title" : "Inspirationmator"
+    }]
+  }
+}

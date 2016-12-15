@@ -1,0 +1,29 @@
+{% extends "demos/imagestudio/layouts/application.html" %}
+{% block title %}Imagemator{% endblock %}
+{% block headline %}Imagemator{% endblock %}
+{% block scripts %}
+<script src="//webintents.org/webintents.js"></script>
+<script type="text/javascript" src="/scripts/index.js"></script>
+{% endblock %}
+{% block content %}
+					<div id="holder">
+						<img src="" id="result" alt="" />
+						<h2>Click to pick an image.</h2>
+					</div>
+					<div class="step-wrap" id="step-wrap">
+						<div id="steps">
+							<div>
+								<p class="btn" id="save">Save
+									<span aria-hidden="true" data-icon="c"></span>
+								</p>
+								<p class="btn" id="share">Share
+									<span aria-hidden="true" data-icon="R"></span>
+								</p>
+								<p class="btn" id="edit">Edit
+									<span aria-hidden="true" data-icon="p"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+{% endblock %}
+{% block footer %}Made by Google{% endblock %}

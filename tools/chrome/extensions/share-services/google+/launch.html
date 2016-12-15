@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        var url;
+        if(intent.data instanceof String) {
+          url = intent.data;
+        }
+        else {
+          url = intent.data.url;
+        }
+
+        var encodedUrl = encodeURIComponent(url);
+        document.location = "https://plus.google.com/share?url=" + encodedUrl;
+      }
+    }); 
+  </script>
+  <body></body>
+</html>

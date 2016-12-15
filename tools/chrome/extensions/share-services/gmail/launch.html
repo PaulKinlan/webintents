@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(intent.data);
+          document.location = "https://mail.google.com/mail/?ui=2&view=cm&fs=1&tf=1&su=" + encodedUrl +"&body=" + encodedUrl;
+        }
+      }
+    }); 
+  </script>
+</html>

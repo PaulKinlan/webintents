@@ -1,0 +1,24 @@
+{% extends "demos/mememator/layouts/application.html" %}
+{% block title %}mememator{% endblock %}
+{% block headline %}<span class="ani">m</span><span class="ani">e</span><span class="ani">m</span><span class="ani">e</span><span class="ani">m</span><span class="more dbl ani">a</span><span class="more ani">t</span><span class="more ani">o</span><span class="ani">r</span>{% endblock %}
+{% block scripts %}
+<script src='//webintents.org/webintents.min.js'></script>
+<script type="text/javascript" src="scripts/memegen.js"></script>
+<script type="text/javascript" src="scripts/index.js"></script>
+{% endblock %}
+{% block content %}
+					<div id="app">
+						<input type="text" id="top" placeholder="Headline, ex. This Kitten" />
+						<div id="container">
+							<h2>Choose an image to Meme:</h2>
+							<img id="image" style="display:none; max-width:600px;" />
+						</div>
+						<input type="text" id="bottom" placeholder="Footer, ex. Eats Souls." />
+						<div id="actions" class="cf">
+							<span id="done" class="btn">Done Editing</span>
+							<span id="save" class="btn">Save Meme</span>
+							<span id="share" class="btn">Share Meme</span>
+						</div>
+					</div>
+{% endblock %}
+{% block footer %}Made by Google{% endblock %}

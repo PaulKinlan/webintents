@@ -1,0 +1,152 @@
+{% extends "demos/cloudfilepicker/layouts/application.html" %}
+{% block title %}Cloud File Picker{% endblock %}
+{% block headline %}Cloud File Picker{% endblock %}
+{% block scripts %}
+  <script src="//webintents.org/webintents.min.js"></script>
+  <script src="//webintents.org/webintents-prefix.js"></script>
+  <script src="/javascripts/events.js"></script>
+  <script src="/scripts/proxy.js"></script>
+  <script src="/scripts/save.js"></script>
+  <script
+    src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
+  <link rel=icon href="favicon.ico" />
+  <intent action="http://webintents.org/pick"
+          type="image/*" />
+
+  <script type="text/javascript">
+    var Intent = window.Intent || window.WebKitIntent;
+    var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+    window.intent = window.intent || window.webkitIntent;
+
+    google.setOnLoadCallback(createPicker);
+    google.load('picker', '1');
+    
+    var clientId = '464627085914-lfj4ile380lp6nd6ikttbsgtrclq3m56.apps.googleusercontent.com';
+    
+    function createPicker() {
+      var pickerBuilder = new google.picker.PickerBuilder();
+      
+      if (!!window.intent) {
+        if (window.intent.action == "http://webintents.org/pick") {
+          if (window.intent.type.indexOf('image/') == 0 || window.intent.type === "*") {
+            // TODO. View.setMimeTypes(string). to limit it to specifc types.
+            pickerBuilder.addViewGroup(
+              new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
+                addView(new google.picker.PhotosView().
+                  setType(google.picker.PhotosView.Type.UPLOADED)).
+                addView(new google.picker.ImageSearchView().
+                  setLicense(google.picker.ImageSearchView.License.None))
+                );
+          }
+          else if(window.intent.type.indexOf('video') == 0) {
+            pickerBuilder.addViewGroup(
+                new google.picker.ViewGroup(google.picker.ViewId.WEBCAM).
+                  setType(google.picker.WebCamView.Type.VIDEOS));
+          }
+        }
+      }
+      else {
+        var view = new google.picker.DocsView(google.picker.ViewId.DOCS_IMAGES_AND_VIDEO);
+        view.setMode(google.picker.DocsViewMode.GRID);
+        pickerBuilder.addView(view);
+        pickerBuilder.addView(new google.picker.ImageSearchView().setLicense(google.picker.ImageSearchView.License.None));
+        pickerBuilder.addView(new google.picker.PhotosView().setType(google.picker.PhotosView.Type.UPLOADED));
+        pickerBuilder.addView(new google.picker.View(google.picker.ViewId.PDFS));
+      }
+
+      pickerBuilder.setAppId(clientId); 
+      pickerBuilder.setCallback(pickerCallback);
+      pickerBuilder.build().setVisible(true);
+      
+      var shareLinkElement = document.getElementById("shareLink");
+      shareLinkElement.addEventListener("click", shareLink, false);
+    }
+
+    function returnImage (e) {
+      if(!!window.intent) {
+        // Load the image via a proxy
+        loadFile(e, function(data) {
+          window.intent.postResult(data);             
+          setTimeout(function() { window.close();}, 500);
+        });
+      }
+    }
+
+    var saveFile = function() {
+      if(selectedData) {
+        var intent = new Intent({"action": "http://webintents.org/save", "type": "text/uri-list", "data": selectedData.url });
+        window.navigator.startActivity(intent, function() {}, function(){});  
+      }
+    };
+
+    var shareFile = function() {
+      if(selectedData) {
+        var intent = new Intent({"action": "http://webintents.org/share", "type": selectedData.mimeType, "data": selectedData.url });
+        window.navigator.startActivity(intent, function() {}, function(){});  
+      }
+    };
+
+    var shareLink = function() {
+      if(selectedData) {
+        var intent = new Intent({"action": "http://webintents.org/share", "type": "text/uri-list", "data": selectedData.url});
+        window.navigator.startActivity(intent, function() {}, function(){});  
+      }
+    };
+
+    var selectedData;
+
+    function pickerCallback(data) {
+      var fileData = data.docs[0].thumbnails[data.docs[0].thumbnails.length  - 1];
+      selectedData = fileData;
+      if(window.webkitIntent) {
+        if (data.action == google.picker.Action.PICKED) {
+          returnImage(fileData.url);
+        }
+        else if(data.action == google.picker.Action.CANCEL) {
+          // Tell the calling app the user cancelled.
+          window.intent.postFailure({});
+        }
+      }
+    }
+  </script>
+  {% endblock %}
+  {% block content %}
+  <style>
+    button {
+      background-color: #D14836;
+      background-image: -webkit-linear-gradient(top,#DD4B39,#D14836);
+      color: white;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      cursor: default;
+      font-size: 11px;
+      font-weight: bold;
+      text-align: center;
+      margin-right: 16px;
+      height: 27px;
+      line-height: 27px;
+      min-width: 54px;
+      outline: 0;
+      padding: 0 8px;
+      cursor: pointer;
+      font-family: arial,sans-serif;
+      border: 1px solid transparent;
+    }
+
+    button:hover {
+     border: 1px solid #B0281A;
+    }
+  </style>
+  <div id="contents">
+    <h2>Now do something with your file</h2>
+
+    <div id="actions">
+      <button id="shareLink">Share Link to file</button>
+      <!--<button id="shareFile">Share File</button>
+      <button id="saveFile">Save File</button> -->
+    </div>
+  </div>
+
+  <a href="http://www.colourlovers.com/lover/sugar%21/loveNote" id="credits">Background by sugar!</a>
+{% endblock %}

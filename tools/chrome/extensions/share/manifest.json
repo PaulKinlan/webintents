@@ -1,26 +1,25 @@
 {
   "name": "Share",
   "description" : "Share images, and links",
+  "manifest_version": 2,
   "permissions": [
-    "contextMenus",
-    "http://*/*",
-    "https://*/*"
+    "contextMenus"
   ],
   "icons": {
-    "16": "16.png"
+    "16": "openshareicon-16x16.png",
+    "48": "openshareicon-48x48.png",
+    "128": "openshareicon-128x128.png"
   },
-  "version": "0.0.0.1",
-  "background_page": "background.html",
-  "content_scripts" : [{
-    "matches" : ["http://*/*", "https://*/*"],
-    "js" :  ["startActivity.js"]
+  "browser_action": {
+    "default_icon": "openshareicon-16x16.png",
+    "default_title": "Share this page"
   },
-  {
-    "matches" : ["https://plus.google.com/"],
-    "js" : ["plus.js"]
-  },
-  {
-    "matches" : ["http://twitter.com/"],
-    "js" : ["twitter.js"]
-  }] 
+  "permissions" : [
+    "contextMenus"
+  ],
+  "version": "2012.108.123.10910",
+  "minimum_chrome_version": "23.0.0.0",
+  "background": {
+    "scripts": ["background.js"]
+  }
 }

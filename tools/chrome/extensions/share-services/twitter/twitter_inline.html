@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        var url;
+        if(intent.data instanceof String) {
+          url = intent.data;
+        }
+        else {
+          url = intent.data.url;
+        }
+
+        var href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url);
+
+        window.location = href;
+      }
+    </script>
+  </head>
+</html>

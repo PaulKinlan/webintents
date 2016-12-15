@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="/styles/application.css">
+	<link rel=icon href="favicon.ico" />
+	<intent action="http://webintents.org/edit" type="image/*" href="index.html" />
+</head>
+<body onload="show_box_load();" class="hide">
+	<div class="nother">
+		<table>
+			<tr>
+				<td>
+					<div class="wrapper">
+						<header class="hide">
+							<h1>{% block headline %}{% endblock %}</h1>
+						</header>
+						<section class="hide">
+							{% block content %}{% endblock %}
+						</section>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer>{% block footer %}{% endblock %}</footer>
+</body>
+<!-- scripts -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% block scripts %}{% endblock %}
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-28536959-6']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</html>

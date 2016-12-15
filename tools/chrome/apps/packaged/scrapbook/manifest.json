@@ -1,0 +1,29 @@
+{
+  "name": "Scrapbook",
+  "version": "1.0.0.0",
+  "icons" : {
+    "16" : "16.png",
+    "48" : "48.png",
+    "128" : "128.png"
+  },
+  "app" : {
+    "launch" : {
+      "local_path" : "index.html"
+    }
+  },
+  "permissions" : ["unlimitedStorage"],
+  "intents": {
+    "http://webintents.org/pick" : [{
+      "type" : ["image/*"],
+      "path" : "/pick.html",
+      "disposition" : "inline",
+      "title" : "Pick file from Scrapbook"
+    }],
+    "http://webintents.org/save" : [{
+      "type": ["*"],
+      "path": "save.html",
+      "disposition" : "inline",
+      "title" : "Save to scrapbook"
+    }]
+  }
+}

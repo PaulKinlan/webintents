@@ -1,0 +1,25 @@
+{
+  "name": "Share",
+  "description" : "Share images, and links",
+  "manifest_version": 2,
+  "permissions": [
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "openshareicon-16x16.png",
+    "48": "openshareicon-48x48.png",
+    "128": "openshareicon-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "openshareicon-16x16.png",
+    "default_title": "Share this page"
+  },
+  "permissions" : [
+    "contextMenus"
+  ],
+  "version": "0.0.0.4",
+  "minimum_chrome_version": "23.0.0.0",
+  "background": {
+    "scripts": ["background.js"]
+  }
+}

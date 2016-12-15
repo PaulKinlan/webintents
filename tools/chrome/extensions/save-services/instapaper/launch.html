@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//webintents.org/webintents.min.js"></script>
+    <script>
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type.indexOf("text/") == 0) {
+          var now = new Date().getTime();
+          var href = "http://www.instapaper.com/hello2?url=" + 
+              encodeURIComponent(intent.data);
+          window.location = href;
+        }
+      }
+    </script>
+  </head>
+</html>

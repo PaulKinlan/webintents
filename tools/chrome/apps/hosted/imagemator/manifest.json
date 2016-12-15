@@ -1,0 +1,13 @@
+{
+  "name": "Imagemator",
+  "version": "1.0.0.2",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.imagemator.com/"],
+    "launch" : {
+      "web_url" : "http://www.imagemator.com/"
+    }
+  }
+}

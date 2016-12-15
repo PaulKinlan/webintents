@@ -1,0 +1,26 @@
+{% extends "demos/inspirationmator/layouts/application.html" %}
+{% block title %}Inspriationmator{% endblock %}
+{% block headline %}Inspriationmator{% endblock %}
+{% block scripts %}
+<script src="//webintents.org/webintents.min.js"></script>
+<script src="scripts/memegen.js"></script>
+<script src="scripts/pick.js"></script>
+<script type="text/javascript">
+function show_box_load() {
+	setTimeout(function(){
+		$('body, header, section').fadeIn(500);
+	}, 10);
+}
+</script>
+  {% endblock %}
+{% block content %}
+<div id="container">
+  <h1 itemprop="name">InspirationMator: Image {{title}}</h1>
+  <p itemprop="description">{{text_top}} - {{text_bottom}}</p>
+  <img id="image" itemprop="image" src="{{url}}"/>
+</div>
+<input type="button" class="btn primary" id="save" value="Save Inspiration" style="display: inline-block;" />
+<input type="button" class="btn primary" id="share" value="Share Inspriation" style="display: inline-block;" />
+<input type="button" class="btn primary" id="sharelink" value="Share Page" style="display: inline-block;" />
+{% endblock %}
+{% block footer %}Made by Google{% endblock %}

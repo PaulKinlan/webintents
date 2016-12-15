@@ -1,0 +1,23 @@
+{
+  "name": "Bookmark manager",
+  "version": "0.0.0.3",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "intents" : {
+    "http://webintents.org/pick" : [{
+       "type" : ["text/uri-list"],
+       "title" : "Pick URL from Bookmarks",
+       "href" : "/pick.html",
+       "disposition": "inline"
+    }],
+    "http://webintents.org/save" : [{
+       "type" : ["text/uri-list"],
+       "title" : "Save URL to Bookmarks",
+       "href" : "/save.html",
+       "disposition": "inline"
+    }]
+  },
+ "permissions" : ["bookmarks"]
+}

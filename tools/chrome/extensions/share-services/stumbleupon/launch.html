@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          document.location = "http://digg.com/submit?phase=2&url="+ encodeURIComponent(intent.data);
+        }
+      }
+    }); 
+  </script>
+</html>

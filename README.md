@@ -6,6 +6,14 @@ Web Intents is a discovery mechanism and extremely light-weight RPC system betwe
 Usage
 =====
 
+To use today
+------------
+No browsers currently support this API natively.  To use this system simple drop the following code in to your site:
+
+    <script src="http://webintents.org/webintents.min.js"></script>
+
+When browsers start to implement this natively the Shim will defer all its functionality to the native interface.
+
 Declaration
 -----------
 
@@ -25,18 +33,9 @@ To build a client application that can use the share functionality, it is as sim
     var intent = new Intent(
         "http://webintents.org/share", 
         "image/*", 
-        { 
-          uris : ["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] 
-        }
+        "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png" 
     );
     window.navigator.startActivity(intent);
-
-You can even use a FORM so you don't have to do any coding.
-
-    <form method="intent" action="http://webintents.org/share" enctype="image/*">
-       <input name="uris" type="file" accepts="image/*" />
-       <input type="submit" />
-    </form>
 
 Service
 -------
@@ -49,27 +48,52 @@ That's it.
 
 To send data back to the client that invoked it, it is as simple as calling postResult() on the intent.
 
-    window.intent.postResult({ data: "something cool" });
+    window.intent.postResult("something cool");
 
-Examples
+Building
 ========
+Prerequisites:
+Node.js: http://nodejs.org/
+NPM: http://npmjs.org/
+    uglify-js: npm -g install uglify-js
+    
+    ./make all
 
-To run the examples:
+This will build and minify both the server and client components.
 
-    ./run.sh start
+Building Tools
+--------------
 
-Navigate to http://0.0.0.0:8000/
+The tools are a collection of all the apps and extensions that are currently live and available on the web.
 
-To stop the example server:
+    ./make tools
 
-    ./run.sh stop
+Building Apps
+-------------
 
-Tests
-=====
+The apps are a subset of tools, are fully formed, live web apps such as cloudfilepicker.com
 
-To run the tests:
+    ./make apps
 
-    python -m SimpleHTTPServer
+Building Extensions
+-------------------
 
-Navigate to: http://0.0.0.0:8000/SpecRunner.html
+The extensions are a subset of tools and are fully formed extensions for browsers that support intents.
 
+    ./make extensions
+
+Running
+=======
+
+Prerequisites:
+AppEngine: http://appengine.google.com/
+nginx: http://nginx.org/en/
+
+To run the server locally:
+
+    ./server/run.sh
+
+The server will not be set up on port 80 or webintents.org so will need to do the following:
+
+1) Edit /etc/hosts - add the following "127.0.0.1 webintents.org"
+2) Start nginx using using the configuration in https://github.com/PaulKinlan/WebIntents/tree/master/conf

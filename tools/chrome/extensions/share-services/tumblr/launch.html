@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          document.location = "http://www.tumblr.com/share?v=3&u=" + encodeURIComponent(intent.data);
+        }
+      }
+    }); 
+  </script>
+</html>

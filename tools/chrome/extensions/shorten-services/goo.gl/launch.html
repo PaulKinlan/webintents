@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <style>
+      body {
+        position: absolute;
+        padding: 5px;
+        box-sizing: border-box;
+        color: white;
+      }
+
+      .stripes {
+        width: 100%;
+        height: 100%; 
+                                      
+        -webkit-background-size: 50px 50px;
+        -moz-background-size: 50px 50px;
+        background-size: 50px 50px; /* Controls the size of the stripes */
+     }
+
+     .horizontal {
+       background-color: #0ae;
+       background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+       -webkit-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -ms-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+     }
+
+     .vertical {
+            background-color: #f90;
+                background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+                    background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+                        background-image: -moz-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+                            background-image: -ms-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+                                background-image: -o-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+                                    background-image: linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+                                      } 
+
+     h1 { color: white; }
+    </style>
+    <script>
+      var shortUrl;
+      var intent = window.intent || window.webkitIntent;
+      var fetchData = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            var resDiv = document.getElementById("result");
+            var shortDiv = document.getElementById("short");
+            var longDiv = document.getElementById("long");
+            var processing = document.getElementById("state");
+
+            shortUrl = result.id;
+            shortDiv.innerText = shortUrl;
+            shortDiv.href = shortUrl;
+
+            longDiv.innerText = intent.data;
+            processing.innerText = "Done."
+            resDiv.style.display = "block";
+          } 
+        };
+
+        xhr.open("POST", "http://demos.webintents.org/shortener/shorten?url=" + intent.data);
+        xhr.send();
+      };
+        
+      window.addEventListener("DOMContentLoaded", function() {
+        if(intent) {
+          fetchData();
+        }
+
+        var retButton = document.getElementById("return");
+        retButton.addEventListener("click", function() {
+          intent.postResult(shortUrl);
+          window.close();
+        });
+      }, false);
+    </script>
+    <style>
+      #short, #long {
+        font-weight: bold;
+      }
+
+      #state {
+        text-shadow: 0px 0px 5px #000000;
+      }
+
+      button, #return {
+        display: block;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="vertical stripes">
+    <h1 id="state">Processing</h1>
+    <div id="result" style="display:none">
+      Shortening <span id="long"></span>
+      to <a id="short"></a>.
+      <br/>
+      <button class="btn primary" id="return">Return</button>
+    </div>
+  </body>
+</html>

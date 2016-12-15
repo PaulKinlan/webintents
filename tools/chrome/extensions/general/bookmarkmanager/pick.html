@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.js"></script>
+    <script>
+      var renderRecent = function(bookmarks) {
+        var recentBookmarks = $("#recentBookmarks");
+        var renderBookmark = function(bookmark) {
+          var el = $("<li><a><img /><span></span></a></li>")[0];
+          var li = el.children[0].children[1];
+          li.href = bookmark.url;
+          li.innerText = bookmark.title || bookmark.url;
+          var img = el.children[0].children[0];
+          img.src = "chrome://" ;
+
+          recentBookmarks.append(el) 
+        };
+
+        bookmarks.forEach(renderBookmark);
+      };
+
+      var renderSearch = function(bookmarks) {
+        var searchResults = $("#searchResults");
+        var renderBookmark = function(bookmark) {
+          var el = $("<li><a><img /><span></span></a></li>")[0];
+          var li = el.children[0].children[1];
+          li.href = bookmark.url;
+          li.innerText = bookmark.title || bookmark.url;
+          var img = el.children[0].children[0];
+          img.src = "chrome://" ;
+          
+          searchResults.append(el) 
+        };
+
+        bookmarks.forEach(renderBookmark);
+      };
+
+      $(document).ready(function() {
+        chrome.bookmarks.getRecent(10, renderRecent);
+        var searchResults = $("#searchResults");
+
+        $("#search").keyup(function(e) {
+          var searchString = e.target.value;
+          searchResults.empty();
+          chrome.bookmarks.search(searchString, renderSearch); 
+        });
+      });
+
+      $("a").live('click', function(e) {
+        var intent = window.intent || window.webkitIntent;
+        intent.postResult(e.target.href);
+        return false;
+      });
+    </script>
+    <style>
+      a {
+        display: block;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Recent</h2>
+    <ul id="recentBookmarks"></ul>
+    <h2>Search</h2>
+    <input type="text" placeholder="Search" id="search" />
+    <ul id="searchResults"></ul>
+  </body>
+</html>

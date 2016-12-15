@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/application.css">
+ 	<link rel="stylesheet" href="styles_new/application_new.css">   	
+ 	<link rel="stylesheet" href="styles_new/css-buttons.css">
+ 	<link href='http://fonts.googleapis.com/css?family=PT+Sans|Poiret+One|Londrina+Sketch|Comfortaa|Reenie+Beanie|Droid+Sans' rel='stylesheet' type='text/css'>  	
+ 	<link rel="stylesheet" href="styles_new_fonts_roboto/roboto.css"> <!-- Android Ice Cream Sandwich font--> 
+  
+	<link rel=icon href="favicon.ico" />
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+	<script type="text/javascript" src="scripts/jquery.jspath.js"></script>
+	<script type="text/javascript" src="scripts/jquery.loremipsum.js"></script>
+  <script src='//webintents.org/webintents.min.js'></script>
+
+ 	<script>
+		 $(document).ready(function(){		
+		 	   
+			var height = $(window).height();		   
+			
+			if (height>768) {
+				$('#container').css({'height':'500px'});
+			}else if (height<=600) {
+				$('#container').css({'height':'290px'});
+			}else {
+				$('#container').css({'height':'350px'});
+			}
+		   
+		 });		
+	</script>	
+
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+  <header>
+    <div class="header_inner">
+	  	<div class="min-width">
+	  	 	<h1><a class="logo" href="http://www.picksomeipsum.com">{% block headline %}{% endblock %}</a></h1>
+	  	</div>		
+	  </div>
+</header>
+<section>
+{% block content %}{% endblock %}
+</section>
+<footer>
+</footer>
+</body>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28536959-9']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>  
+</html>

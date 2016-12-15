@@ -1,0 +1,12 @@
+html {
+  background-color: #ddd;
+}
+
+body {
+  margin: 30px 50px 30px 50px;
+  box-shadow: 0 0 10px #666;
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #eee;
+}
