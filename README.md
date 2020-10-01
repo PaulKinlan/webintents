@@ -71,7 +71,7 @@ The tools are a collection of all the apps and extensions that are currently liv
 Building Apps
 -------------
 
-The apps are a subset of tools, are fully formed, live web apps such as cloudfilepicker.com
+The apps are a subset of tools ,are fully formed , live web apps such as cloudfilepicker.com
 
     ./make apps
 
@@ -89,7 +89,7 @@ Prerequisites:
 AppEngine: http://appengine.google.com/
 nginx: http://nginx.org/en/
 
-To run the server locally:
+To run the server locally follow this:
 
     ./server/run.sh
 
